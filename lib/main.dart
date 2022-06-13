@@ -60,29 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 labelText: 'Search',
               ),
             ),
-            Row(
-              children: [
-                ElevatedButton(
-                    onPressed: () {
-                      if (page <= 0) {
-                        return;
-                      }
-
-                      setState(() {
-                        page--;
-                      });
-                    },
-                    child: Text("Previous")),
-                ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        page++;
-                      });
-                    },
-                    child: Text("Next"))
-              ],
-            ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 10),
             Expanded(
               child: FutureBuilder<SearchResponse>(
                 future: searchText.isEmpty ? fetchTrending(http.Client()) : fetchPhotos(http.Client(), searchText, page: page),
@@ -176,7 +154,8 @@ class _PhotoWidgetState extends State<PhotoWidget> {
       child: AspectRatio(
         aspectRatio: widget._item.images!.downsized!.width! / widget._item.images!.downsized!.height!,
         child: Stack(children: [
-          Image(
+          FadeInImage(
+            placeholder: NetworkImage(widget._item.images!.still!.url!),
             image: NetworkImage(widget._item.images!.downsized!.url!),
           ),
           Center(child: clicked ?  const Icon(Icons.check_circle, color: Colors.white, size: 40) : const SizedBox()),

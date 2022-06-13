@@ -147,6 +147,7 @@ class PhotoItem {
 class Images {
   Original? original;
   Original? downsized;
+  Original? still;
 
   Images({this.original, this.downsized});
 
@@ -156,6 +157,9 @@ class Images {
         : null;
     downsized = json['downsized_medium'] != null
         ? Original.fromJson(json['downsized_medium'])
+        : null;
+    still = json['downsized_still'] != null
+        ? Original.fromJson(json['downsized_still'])
         : null;
   }
 
