@@ -10,7 +10,7 @@ SearchResponse parsePhotos(String responseBody) {
 }
 
 Future<SearchResponse> fetchPhotos(http.Client client, String searchText, { int page = 0 }) async {
-  int limit = 50;
+  int limit = 100;
   int offset = page * limit;
   final response = await client.get(Uri.parse('https://api.giphy.com/v1/gifs/search?type=gifs&limit=$limit&offset=$offset&api_key=3rgXBKNKDmcA5Ykg9i&q=$searchText'));
   return compute(parsePhotos, response.body);
